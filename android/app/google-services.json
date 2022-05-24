@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "863595689470",
+    "project_id": "fir-uber-fe8bb",
+    "storage_bucket": "fir-uber-fe8bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:863595689470:android:2dffff4aeb61b5fe607caf",
+        "android_client_info": {
+          "package_name": "com.example.uberfirebasedriver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "863595689470-a8bra6sefsb3qv1ar05higdgb1s8mjb2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyxWQixVC3r09t6FZK8IaK9PyBFnZKFow"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "863595689470-a8bra6sefsb3qv1ar05higdgb1s8mjb2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "863595689470-0jquas6g0alq0rjt1dbomkqat17gl8dl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.uberfirebasedriverfix"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
