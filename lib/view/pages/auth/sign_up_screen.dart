@@ -1,7 +1,12 @@
+import 'dart:io';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:uberfirebasedriver/view/shared/global.dart';
+import 'package:uberfirebasedriver/view/shared/progress_dialog.dart';
 
 import 'login_screen.dart';
-
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -28,6 +33,43 @@ class _SignUpScreenState extends State<SignUpScreen> {
     } else if (passwordTextEditingController.text.length < 6) {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Password must be more than 6 characters")));
+    } else {
+      saveDriverInfo();
+    }
+  }
+
+  saveDriverInfo() async {
+    showDialog(
+        context: context,
+        builder: (context) => ProgressDialog(
+              message: "Please Wait!!!",
+            ),
+        barrierDismissible: false);
+    final User? firebaseUser = (await fAuth
+            .createUserWithEmailAndPassword(
+      email: emailTextEditingController.text.trim(),
+      password: passwordTextEditingController.text.trim(),
+    )
+            .catchError((e) {
+      print(e);
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Error: $e")));
+    }))
+        .user;
+
+    if (firebaseUser != null) {
+      Map driverMap = {
+        "id": firebaseUser.uid,
+        "name": nameTextEditingController.text.trim(),
+        "email": emailTextEditingController.text.trim(),
+        "phone": phoneTextEditingController.text.trim(),
+      };
+      Reference driversRef = FirebaseStorage.instance.ref().child("drivers");
+      driversRef.child(firebaseUser.uid).writeToFile(driverMap);
+    } else {
+      Navigator.of(context).pop();
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Accoung has not created")));
     }
   }
 
